@@ -1,0 +1,53 @@
+
+
+
+  <div>
+  <md-content class="md-padding">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Register">
+        <md-content md-content layout="column" flex class="md-padding" layout-align="center center">
+          <md-whiteframe class="md-whiteframe-z2">    
+            <md-subheader class="md-no-sticky">Fill in you details below to register</md-subheader>
+            {{ register.error }}
+              <form>        
+                  <md-input-container>
+                      <label>Username</label>
+                      <input ng-model="users.formData.username" type="text">
+              </md-input-container>
+                  <md-input-container>
+                      <label>Password</label>
+                      <input ng-model="users.formData.password" type="text">
+                  </md-input-container>
+                  <div layout="row">
+                      <span flex></span>
+                      <md-button ng-click="users.register()" class="md-raised md-accent">Register</md-button>
+                  </div>
+              </form>
+          </md-whiteframe>
+        </md-content>
+      </md-tab>
+      <md-tab label="Login">
+        <md-content md-content layout="column" flex class="md-padding" layout-align="center center">
+          <md-whiteframe class="md-whiteframe-z2">    
+            <md-subheader class="md-no-sticky">Fill in you details below to Login</md-subheader>
+            {{ register.error }}
+              <form>        
+                  <md-input-container>
+                      <label>Username</label>
+                      <input ng-model="users.formData.username" type="text">
+              </md-input-container>
+                  <md-input-container>
+                      <label>Password</label>
+                      <input ng-model="users.formData.password" type="text">
+                  </md-input-container>
+                  <div layout="row">
+                      <span flex></span>
+                      <md-button ng-click="users.logIn()" class="md-raised md-accent">Register</md-button>
+                  </div>
+              </form>
+          </md-whiteframe>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

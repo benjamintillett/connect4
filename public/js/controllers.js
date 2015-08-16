@@ -5,19 +5,17 @@ function UsersCtrl($state,auth){
 	var formData = {};
 
 	self.register = function(){
-		auth.register(self.formData).error(function(error){
-			self.error = error;
-		}).then(function(){
+		auth.register(self.formData).then(function(){
 			$state.go('home');
+		}).catch(function(error){
+			self.error = error;
 		})
 	}
 	self.logIn = function(){
-		auth.logIn(self.formData).error(function(error){
-			self.error = error;
-		}).then(function(){
-			console.log(auth.currentUser());
-			console.log(auth.isLoggedIn());
+		auth.logIn(self.formData).then(function(){
 			$state.go('home');
+		}).catch(function(error){
+			self.error = error;
 		})
 	}
 }	

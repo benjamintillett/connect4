@@ -1,0 +1,46 @@
+{
+  "name": "connect4",
+  "version": "1.0.0",
+  "description": "An api for connect4 game using express and mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamintillett/connect4.git"
+  },
+  "keywords": [
+    "express",
+    "mongoose",
+    "mongo",
+    "tdd",
+    "jasmine"
+  ],
+  "author": "Ben Tillett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benjamintillett/connect4/issues"
+  },
+  "homepage": "https://github.com/benjamintillett/connect4#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "crypto": "0.0.3",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-jwt": "^3.0.1",
+    "jsonwebtoken": "^5.0.4",
+    "karma-chrome-launcher": "^0.2.0",
+    "mongoose": "^4.1.2",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "validator": "^4.0.2"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.2",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.9",
+    "karma-jasmine": "^0.3.6",
+    "protractor": "^2.1.0"
+  }
+}

@@ -3,7 +3,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
+var config = require('../config');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connect4');
 
@@ -12,6 +12,7 @@ require('./models/User');
 var routes = require('./routes/index');
 require('./config/passport');
 
+app.set('config',config);
 app.set('port', (process.env.PORT || 3000));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine','ejs');

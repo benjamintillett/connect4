@@ -1,6 +1,6 @@
 var should 	= require('should');
 var request = require('supertest');
-var app 	= require('../server');
+var app 	= require('../app/server');
 var User 	= require('mongoose').model('User');
 var chai 	= require('chai')
 var expect 	= chai.expect;

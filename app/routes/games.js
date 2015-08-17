@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var Utils 	= require('../lib/utils');
-var Game  	= require('../models/game');
+var express 	= require('express');
+var router 		= express.Router();
+var Utils 		= require('../lib/utils');
+var Game  		= require('../models/game');
+var connect4 	= require('../lib/connect4'); 
 
 function games(app) {
 
@@ -11,15 +12,17 @@ function games(app) {
 				"Error": "Must provide name field!"
 			});
 		}
+		var rows = req.body.rows || app.get('config').MIN_ROWS
+		var columns = req.body.columns || app.get('config').MIN_COLUMNS
 
 		var newGame = {
 			p1Key: Utils.randomValueHex(25),
 			p2Key: Utils.randomValueHex(25),
 			boardId: Utils.randomValueHex(6),
 			p1Name: req.body.name,
-			board: [[],[]],
-			rows: req.body.columns || app.get('config').MIN_ROWS,
-			columns: req.body.columns || app.get('config').MIN_COLUMNS,
+			rows: rows,
+			columns: columns,
+			board: connect4.initializeBoard(rows,columns),
 			turn: 1,
 			status: 'Game in progress'
 		};

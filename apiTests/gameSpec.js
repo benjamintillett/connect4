@@ -31,4 +31,22 @@ describe('Create a new game object with a key for player 1',function(){
 			});
 	});
 
+	it('should allow you to customize the size of the board',function(done){
+		request(app).post('/games/create')
+			.send({
+				name: 'express',
+				columns: 8,
+				rows: 16
+			})
+			.expect(200)
+			.end(function(err,res){
+				var b = res.body;
+				expect(b.columns).to.equal(8)
+				expect(b.rows).to.equal(16)
+				expect(b.board).to.have.length(16);
+				expect(b.board[0]).to.have.length(8);
+				done();
+			});
+	});	
+
 });

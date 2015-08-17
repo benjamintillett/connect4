@@ -26,6 +26,7 @@
   "homepage": "https://github.com/benjamintillett/connect4#readme",
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "body-parser": "^1.13.3",
     "crypto": "0.0.3",
     "ejs": "^2.3.3",
     "express": "^4.13.3",

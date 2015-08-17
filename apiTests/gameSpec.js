@@ -8,7 +8,7 @@ describe('Create a new game object with a key for player 1',function(){
 	var boardId;
 
 	it('should return a game object  with a key for player 1',function(done){
-		request(app).post('/create')
+		request(app).post('/games/create')
 			.send({name: 'express'})
 			.expect(200)
 			.end(function(err,res){
@@ -21,12 +21,12 @@ describe('Create a new game object with a key for player 1',function(){
 				expect(responseBody.rows).to.be.a('number');
 				expect(responseBody.columns).to.be.a('number');
 				
-				expect(responseBody.board).to.be.an('array').and.equal(1);
-				b.board.forEach(function(elt){
+				expect(responseBody.board).to.be.an('array');
+				responseBody.board.forEach(function(elt){
 					expect(elt).to.be.an('array');
 				});
 
-				boardId = b.boardId;
+				boardId = responseBody.boardId;
 				done();
 			});
 	});

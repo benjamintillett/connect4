@@ -4,7 +4,6 @@ var app 	= require('../app/server');
 var User 	= require('mongoose').model('User');
 var chai 	= require('chai')
 var expect 	= chai.expect;
-console.log(expect);
 
 describe('Users',function(){
 	before(function(done){

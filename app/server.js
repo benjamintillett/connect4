@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connect4');
 
 var passport = require('passport');
 require('./models/User');
-var routes = require('./routes/index');
+
 require('./config/passport');
 
 app.set('config',config);
@@ -22,7 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(passport.initialize());
+
+var routes = require('./routes/index');
+var gameRoutes = require('./routes/games')(app);
+
 app.use('/',routes);
+app.use('/games',gameRoutes);
 
 
 module.exports = app

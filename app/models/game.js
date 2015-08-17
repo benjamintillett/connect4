@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var gameSchema = new mongoose.Schema({
+  p1Key: {
     type: String,
     required: true
   },

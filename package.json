@@ -4,7 +4,8 @@
   "description": "An api for connect4 game using express and mongoose",
   "main": "server.js",
   "scripts": {
-    "test": "node node_modules/karma/bin/karma start test/karma.conf.js"
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "start": "node bin/www"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,8 @@
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.9",
     "karma-jasmine": "^0.3.6",
-    "protractor": "^2.1.0"
+    "protractor": "^2.1.0",
+    "should": "^7.0.4",
+    "supertest": "^1.0.1"
   }
 }

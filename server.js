@@ -11,6 +11,7 @@ require('./models/User');
 var routes = require('./routes/index');
 require('./config/passport');
 
+app.set('port', (process.env.PORT || 3000));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine','ejs');
 app.set('views',__dirname + '/views');
@@ -22,7 +23,5 @@ app.use(passport.initialize());
 app.use('/',routes);
 
 
+module.exports = app
 
-app.listen('3000');
-
-console.log('Express started on port 3000');

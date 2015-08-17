@@ -4,7 +4,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/connect4');
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connect4');
 
 var passport = require('passport');
 require('./models/User');

@@ -31,7 +31,7 @@ describe('Users',function(){
 				})
 				.expect(400)
 				.end(function(err,res){
-					expect(res.body.message).to.equal("Please fill out all fields");
+					expect(res.body.error).to.equal("Please fill out all fields");
 					done(err);
 				});
 		});	

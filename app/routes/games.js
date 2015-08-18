@@ -4,6 +4,21 @@ var Utils 		= require('../lib/utils');
 var Game  		= require('../models/game');
 var connect4 	= require('../lib/connect4'); 
 
+function _sanitizeReturn(game){
+	return {
+		boardId: game.boardId,
+	    board: game.board,
+	    rows: game.rows,
+	    columns: game.columns,
+	    turn: game.turn,
+	    status: game.status,
+	    winner: game.winner,
+	    p1Name: game.p1Name,
+	    p2Name: game.p2Name
+	}
+}
+
+
 
 function games(app) {
 	
@@ -38,6 +53,16 @@ function games(app) {
 			res.status(201).json(game);
 		});
 	});
+
+	router.get('/board/:id',function(req,res){
+		Game.findOne({boardId: req.params.id},function(err, game){
+
+			if(err) return res.status(400).json(err);
+
+			res.status(200).json(_sanitizeReturn(game));
+		});
+	});
+
 	return router
 }
 

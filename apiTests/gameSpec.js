@@ -81,6 +81,20 @@ describe('Create a new game object with a key for player 1',function(){
 		});
 	});	
 
+	it('should be able to fetch a board', function(done){
+		request(app).get('/games/board/' + boardId)
+			.expect(200)
+			.end(function(err,res){
+				var b = res.body;
+				expect(b.boardId).to.be.a('string').and.equal(boardId);
+				expect(b.turn).to.be.a('number').and.equal(1);
+				expect(b.rows).to.be.a('number');
+				expect(b.columns).to.be.a('number');
+				expect(b.board).to.be.an('array');
+				done();
+			});
+	});
+
 });
 
 

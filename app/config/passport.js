@@ -10,10 +10,10 @@ passport.use(new LocalStrategy(
 		User.findOne({username: username},function(err,user){
 			if(err) { return done(err); }
 			if(!user) { 
-				return done(null,false, { message: 'User not found' });
+				return done(null,false, { error: 'User not found' });
 			}
 			if(!user.validPassword(password)){
-				return done(null,false, { message: 'Incorrect password.' });
+				return done(null,false, { error: 'Incorrect password.' });
 			}
 			return done(null,user);
 		})

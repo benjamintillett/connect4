@@ -4,10 +4,10 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('../config');
-
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/connect4');
-
 var passport = require('passport');
+
+require('./lib/db.js');
+
 require('./models/User');
 
 require('./config/passport');

@@ -34,7 +34,7 @@ describe('Users',function(){
 					expect(res.body.message).to.equal("Please fill out all fields");
 					done(err);
 				});
-		});
+		});	
 	});
 
 	describe('login',function(){
@@ -60,7 +60,7 @@ describe('Users',function(){
 				})
 				.expect(401)
 				.end(function(err,res){
-					expect(res.body.message).to.equal("Incorrect password.");
+					expect(res.body.error).to.equal("Incorrect password.");
 					done(err);
 				});
 		});

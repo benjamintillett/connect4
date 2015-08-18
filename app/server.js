@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-var routes = require('./routes/index');
+var routes = require('./routes/index')(app);
 var gameRoutes = require('./routes/games')(app);
 
 app.use('/',routes);

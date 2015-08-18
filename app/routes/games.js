@@ -4,9 +4,12 @@ var Utils 		= require('../lib/utils');
 var Game  		= require('../models/game');
 var connect4 	= require('../lib/connect4'); 
 
-function games(app) {
 
-	router.post('/create',function(req,res,next){
+function games(app) {
+	
+	var Validate 	= require('../lib/validators')(app);
+
+	router.post('/create',[Validate.columns, Validate.rows, Validate.name],function(req,res,next){
 		if(!req.body.name){
 			res.status(400).json({
 				"Error": "Must provide name field!"

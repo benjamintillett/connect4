@@ -2,7 +2,12 @@ var express 	= require('express');
 var router 		= express.Router();
 var Utils 		= require('../lib/utils');
 var Game  		= require('../models/game');
+var GameQueue  	= require('../models/gameQueue');
 var connect4 	= require('../lib/connect4'); 
+var redis = require('redis');
+var client = redis.createClient();
+
+
 
 function _sanitizeReturn(game){
 	return {
@@ -46,6 +51,7 @@ function games(app) {
 		};
 
 		Game.create(newGame,function(err,game){
+			GameQueue.create({boardId: game.boardId});
 			if(err){
 				return res.status(400).json(err);
 			}
@@ -62,6 +68,32 @@ function games(app) {
 			res.status(200).json(_sanitizeReturn(game));
 		});
 	});
+
+	router.post('/join',[Validate.name],function(req,res){
+		GameQueue.findOne({},function(err,game){
+			if(err) res.status(418).json(err)
+			
+			
+			if(!game || !game.boardId){
+				return res.status(418).json({
+					error: "No games to join"
+				});
+			}
+			var boardId = game.boardId;
+			Game.findOne({ boardId: boardId },function(err,game){
+				console.log("three");
+				if(err) return res.status(400).json(err);
+
+				game.p2Name = req.body.name;
+				game.save(function(err,game){
+					if(err) return res.status(500).json(err);
+					game.p1Key = undefined;
+					res.status(200).json(game);
+				});
+			});
+		});
+	});
+
 
 	return router
 }

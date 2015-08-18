@@ -42,7 +42,6 @@ function auth($http,$window){
 	};
 
 	auth.logOut = function(){
-		console.log('hello');
 	  $window.localStorage.removeItem('connect4-token');
 	};
 

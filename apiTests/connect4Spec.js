@@ -8,4 +8,30 @@ describe('connect4',function(){
 			expect(board).to.eql([[' ',' '],[' ',' '],[' ',' ']])
 		});		
 	});
+
+	describe('.makeMove',function(){
+		var board
+
+		before(function(){
+			board = connect4.initializeBoard(3,2);
+		});
+
+		it("doesnt make a move that is outside the board",function(){
+			var newBoard = connect4.makeMove("x",4,board)
+			expect(newBoard).to.eql(null);
+		});
+
+		it("doesn't allow a move in a full column",function(){
+			var board = [[' ','x'],[' ','o'],[' ','x']]
+			var newBoard = connect4.makeMove("x",1,board)
+			expect(newBoard).to.eql(null);
+		});
+
+		it("a valid move returns a board with the correct cell marked",function(){
+			var board = [[' ',' '],[' ','o'],[' ','x']];
+			var newBoard = connect4.makeMove("x",0,board)
+			expect(newBoard).to.eql([[' ',' '],[' ','o'],['x','x']]);
+		});
+
+	});
 });

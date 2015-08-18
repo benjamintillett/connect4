@@ -11,6 +11,7 @@ module.exports = function(app){
 
 	return {
 
+
 		columns: function(req,res,next){
 			if(req.body.columns && req.body.columns < MIN_COLUMNS){
 				return _return400Error(res, "Number of columns has to be >= " + MIN_COLUMNS);
@@ -31,11 +32,23 @@ module.exports = function(app){
 		},
 		userFields: function(req,res,next){
 			if(!req.body.username || !req.body.password){
-				console.log('hello');
 				return _return400Error(res,'Please fill out all fields');
 			}	
 			next();
+		},
+		token: function(req,res,next){
+			if(!req.headers['x-player-token']){
+				return _return400Error(res,'Missing X-Player-Token!');
+			}	
+			next();
+		},
+		move: function(req,res,next){
+			if(!req.body.column){
+				return _return400Error(res,'Move where? Missing column!');
+			}
+			next();
 		}
+
 
 	}
 }

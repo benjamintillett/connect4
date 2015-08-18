@@ -23,6 +23,11 @@ function _sanitizeReturn(game){
 	}
 }
 
+function _return400Error(res,message){
+	return res.status(400).json({
+		error: message
+	});
+};
 
 
 function games(app) {
@@ -93,6 +98,21 @@ function games(app) {
 			});
 		});
 	});
+
+	router.put('/board/:id',[Validate.token, Validate.move],function(req,res){
+		Game.findOne({boardId: req.params.id},function(err,game){
+			if(!game){
+				return res.status(400).json({error: 'Cannot find board!'});
+			}
+			if(req.headers['X-Player-Token'] !== game.p1Key && req.headers['X-Player-Token'] !== game.p2Key) {
+	        	return _return400Error(res, 'Wrong X-Player-Token!');
+	     	}
+	      	res.status(200);
+		});
+
+
+	});
+
 
 
 	return router

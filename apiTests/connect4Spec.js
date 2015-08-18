@@ -65,7 +65,7 @@ describe('connect4',function(){
 					 [' ',' ',' ',' ',' '],
 					 ['x','x','x','x',' '],
 					]
-			var player = "o";
+			var player = "x";
 			expect(connect4.checkForVictory(player,3,board)).to.eql(true);
 		});
 	});

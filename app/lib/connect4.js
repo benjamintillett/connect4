@@ -44,6 +44,9 @@ connect4.checkForVictory = function(player,column,board){
 	if(this.checkVertical(player,column,row,board)){
 		return true
 	}
+	if(this.checkHorizontal(player,column,row,board)){
+		return true
+	}
 	return false
 }
 connect4.getLastRow = function(player,column,board){
@@ -57,13 +60,33 @@ connect4.getLastRow = function(player,column,board){
 connect4.checkVertical = function(player,column,row,board){
 	var line = 0;
 	var value = player;
-	while(value == player && row < board.length){
-		value == board[row][column];
+	var currentRow = row
+	while(value == player && currentRow < board.length){
+		value == board[currentRow][column];
 		line++
-		row++
+		currentRow++
 	}
 	return line >= 4;
 }
+connect4.checkHorizontal = function(player,column,row,board){
+	var line = 0;
+	var currentColumn = column;
+	value = board[row][currentColumn];
+	while(value == player && currentColumn < board[0].length){
+		line++
+		currentColumn++
+		value = board[row][currentColumn];
+	}
+	var currentColumn = column - 1;
+	value = board[row][currentColumn];
+	while(value == player && currentColumn >= 0){
+		line++
+		currentColumn--
+		value = board[row][currentColumn];
+	}
+	return line >= 4;	
+}
+
 
 
 

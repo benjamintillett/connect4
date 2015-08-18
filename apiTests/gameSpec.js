@@ -143,6 +143,7 @@ describe('create and join a new game',function(){
 			.expect(200)
 			.end(function(err, res) {
 				var b = res.body;
+				console.log(b);
 				expect(b.boardId).to.be.a('string');
 				expect(b.p1Key).to.be.undefined;
 				expect(b.p1Name).to.be.a('string').and.equal('express');

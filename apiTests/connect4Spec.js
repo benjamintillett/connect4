@@ -46,37 +46,38 @@ describe('connect4',function(){
 		});
 	});
 
+
 	describe('checkForVictory', function(){
-		var board;
+		// var board;
 
-		before(function(){
-			connect4.rows = 5;
-			connect4.columns = 5;
-			connect4.board = [
-					 [' ',' ',' ',' ',' '],
-					 [' ',' ',' ',' ','o'],
-					 [' ',' ',' ',' ','o'],
-					 [' ',' ',' ',' ','o'],
-					 ['x','x','x',' ','o'],
-					]
-		});
+		// before(function(){
+		// 	connect4.rows = 5;
+		// 	connect4.columns = 5;
+		// 	connect4.board = [
+		// 			 [' ',' ',' ',' ',' '],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 ['x','x','x',' ','o'],
+		// 			]
+		// });
 
-		it('knows x has not won',function(){
-			expect(connect4.checkForVictory('x')).to.eql(false);
-		});
+		// it('knows x has not won',function(){
+		// 	expect(connect4.checkForVictory('x',1)).to.eql(false);
+		// });
 
-		it('can recognize a vertical win', function(){
-			connect4.board = [
-					 [' ',' ',' ',' ',' '],
-					 [' ',' ',' ',' ','o'],
-					 [' ',' ',' ',' ','o'],
-					 [' ',' ',' ',' ','o'],
-					 ['x','x','x',' ','o'],
-			]
-			connect4.rows = 5;
-			connect4.columns = 5;
-			expect(connect4.checkForVictory('o')).to.eql(true);
-		});
+		// it('can recognize a vertical win', function(){
+		// 	connect4.board = [
+		// 			 [' ',' ',' ',' ',' '],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 [' ',' ',' ',' ','o'],
+		// 			 ['x','x','x',' ','o'],
+		// 	]
+		// 	connect4.rows = 5;
+		// 	connect4.columns = 5;
+		// 	expect(connect4.checkForVictory('o',4)).to.eql(true);
+		// });
 
 		// it('can recognize a horizontal win',function(){
 		// 	connect4.board = [
@@ -88,19 +89,33 @@ describe('connect4',function(){
 		// 			]
 		// 	connect4.rows = 5;
 		// 	connect4.columns = 5;
-		// 	expect(connect4.checkForVictory('x')).to.eql(true);
+		// 	expect(connect4.checkForVictory('x',1)).to.eql(true);
 		// });
 		// it('can recognize a upwards digonal win',function(){
-		// 	board = [
+		// 	connect4.board = [
 		// 			 [' ',' ',' ',' ',' '],
 		// 			 [' ',' ',' ','o',' '],
 		// 			 [' ',' ','o','x',' '],
 		// 			 ['x','o','o','o',' '],
 		// 			 ['o','x','x','x',' '],
 		// 			]
-		// 	var player = "x";
-		// 	expect(connect4.checkForVictory(player,3,board)).to.eql(true);
+		// 	connect4.rows = 5;
+		// 	connect4.columns = 5;
+		// 	expect(connect4.checkForVictory('o',1)).to.eql(true);
 		// });
+		it('can recognize a upwards digonal win',function(){
+			connect4.board = [
+					 [' ','x',' ',' ',' '],
+					 [' ','o','x','o',' '],
+					 [' ','o','o','x',' '],
+					 ['x','o','o','o','x'],
+					 ['o','x','x','x','o'],
+					]
+			connect4.rows = 5;
+			connect4.columns = 5;
+			expect(connect4.checkForVictory('o',1)).to.eql(true);
+			expect(connect4.checkForVictory('x',0)).to.eql(false);
+		});
 	});
 
 });

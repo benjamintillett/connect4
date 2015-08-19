@@ -1,4 +1,4 @@
-var Connect4 = require('../app/lib/onnect4');
+var Connect4 = require('../app/lib/csonnect4');
 var expect = require('chai').expect
 
 describe('connect4',function(){

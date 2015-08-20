@@ -1,5 +1,3 @@
-
-
 function Connect4(){
 	this.initializeBoard = function(rows,columns){
 		var board = [];
@@ -12,33 +10,34 @@ function Connect4(){
 		}
 		this.rows 	= rows;
 		this.columns = columns; 
-		this.board 	= board;
+		return board;
 	}	
-	this.makeMove = function(column,player){
-		if (!this.isInBoard(column)) return false;
-		if (this.columnIsFull(column,this.board)) return false;		
-		this.placeChip(column,player)
-		return this.board
+	this.makeMove = function(column,player,board){
+		if (!this.isInBoard(column,0,board)) return false;
+		if (this.columnIsFull(column,board)) return false;		
+		return this.placeChip(column,player,board)
 	}
 
-	this.isInBoard = function(column,row){
+	this.isInBoard = function(column,row,board){
+		var rows 	= board.length;
+		var columns = board[0].length;
 		var row = row || 0;
 		var column = column;
-		return ( 0 <= column && column < this.columns && 0 <= row && row < this.rows)
+		return ( 0 <= column && column < columns && 0 <= row && row < rows)
 	}
 
-	this.placeChip = function(column,player){
+	this.placeChip = function(column,player,board){
 		var emptyRow;
-		this.board.forEach(function(row,index){
+		board.forEach(function(row,index){
 			if (row[column] == ' ') emptyRow = index
 		});
-		this.board[emptyRow][column] = player;
-		return this.board;	
+		board[emptyRow][column] = player;
+		return board;	
 	}
 
-	this.columnIsFull = function(column){
+	this.columnIsFull = function(column,board){
 		var isFull = true
-		this.board.forEach(function(row){
+		board.forEach(function(row){
 			if(row[column]== ' '){
 				isFull = false;
 			}
@@ -46,57 +45,55 @@ function Connect4(){
 		return isFull;
 	}
 
-	this.checkForVictory = function(player,column){
-		var row = this.getRowIndexOfLastChip(player,column)
-		if(this.hasVerticalConnect4(player,column)) return true
-		if(this.hasHorizontalConnect4(player,row)) return true
-		if(this.hasDiagonallyUpConnect4(player,row,column)) return true
-		if(this.hasDiagonallyDownConnect4(player,row,column)) return true
+	this.checkForVictory = function(player,column,board){
+		var row = this.getRowIndexOfLastChip(player,column,board)
+		if(this.hasVerticalConnect4(player,column,board)) return true
+		if(this.hasHorizontalConnect4(player,row,board)) return true
+		if(this.hasDiagonallyUpConnect4(player,row,column,board)) return true
+		if(this.hasDiagonallyDownConnect4(player,row,column,board)) return true
 		return false
 	}
 
-	this.getRowIndexOfLastChip = function(player,column){
+	this.getRowIndexOfLastChip = function(player,column,board){
 		var lastRow;
-		this.board.forEach(function(row,index){
+		board.forEach(function(row,index){
 			if (row[column] == player && lastRow == undefined) lastRow = index
 		});
 		return lastRow;
 	}
 
-	this.getColumnArray = function(column){
+	this.getColumnArray = function(column,board){
 		var columnArray = [];
-		this.board.forEach(function(row){
+		board.forEach(function(row){
 			columnArray.push(row[column]);
 		});
 		return columnArray;
 	}	
 
-	this.getDiagonallyUpArray = function(column,row){
-		var board = this.board;
+	this.getDiagonallyUpArray = function(column,row,board){
 		var currentRow = row;
 		var currentColumn = column;
-		while(this.isInBoard(currentColumn - 1,currentRow + 1)){
+		while(this.isInBoard(currentColumn - 1,currentRow + 1,board)){
 			currentColumn--
 			currentRow++
 		}
 		var diagonalArray = [];
-		while(this.isInBoard(currentColumn,currentRow)){
+		while(this.isInBoard(currentColumn,currentRow,board)){
 			diagonalArray.push(board[currentRow][currentColumn]);
 			currentColumn++
 			currentRow--
 		}
 		return diagonalArray;
 	}
-	this.getDiagonallyDownArray = function(column,row){
-		var board = this.board;
+	this.getDiagonallyDownArray = function(column,row,board){
 		var currentRow = row;
 		var currentColumn = column;
-		while(this.isInBoard(currentColumn - 1,currentRow - 1)){
+		while(this.isInBoard(currentColumn - 1,currentRow - 1,board)){
 			currentColumn--
 			currentRow--
 		}
 		var diagonalArray = [];
-		while(this.isInBoard(currentColumn,currentRow)){
+		while(this.isInBoard(currentColumn,currentRow,board)){
 			diagonalArray.push(board[currentRow][currentColumn]);
 			currentColumn++
 			currentRow++
@@ -118,21 +115,21 @@ function Connect4(){
 		return lineOf4;
 	}
 
-	this.hasVerticalConnect4 = function(player,column){
-		var columnArray = this.getColumnArray(column);
+	this.hasVerticalConnect4 = function(player,column,board){
+		var columnArray = this.getColumnArray(column,board);
 		return this.checkForLineOf4(columnArray,player);
 	} 
 
-	this.hasHorizontalConnect4 = function(player,rowIndex){
-		var row = this.board[rowIndex];
+	this.hasHorizontalConnect4 = function(player,rowIndex,board){
+		var row = board[rowIndex];
 		return this.checkForLineOf4(row,player);	
 	}
-	this.hasDiagonallyUpConnect4 = function(player,row,column){
-		var diagonalArray = this.getDiagonallyUpArray(column,row);
+	this.hasDiagonallyUpConnect4 = function(player,row,column,board){
+		var diagonalArray = this.getDiagonallyUpArray(column,row,board);
 		return this.checkForLineOf4(diagonalArray,player);		
 	}
-	this.hasDiagonallyDownConnect4 = function(player,row,column){
-		var diagonalArray = this.getDiagonallyDownArray(column,row);
+	this.hasDiagonallyDownConnect4 = function(player,row,column,board){
+		var diagonalArray = this.getDiagonallyDownArray(column,row,board);
 		return this.checkForLineOf4(diagonalArray,player);		
 	}
 

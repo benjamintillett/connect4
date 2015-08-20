@@ -81,8 +81,8 @@ describe('Make move | ',function(err,res){
 			.send({column: 18})
 			.expect(200)
 			.end(function(err,res){
-				done();
 				expect(res.body.error).to.equal('Bad Move!');
+				done();
 			});
 	});
 	

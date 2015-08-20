@@ -3,10 +3,10 @@ var router 		= express.Router();
 var Utils 		= require('../lib/utils');
 var Game  		= require('../models/game');
 var GameQueue  	= require('../models/gameQueue');
-var connect4 	= require('../lib/connect4'); 
+var Connect4 	= require('../lib/Connect4'); 
 var redis = require('redis');
 var client = redis.createClient();
-
+var connect4 = new Connect4();
 
 
 function _sanitizeReturn(game){
@@ -107,6 +107,7 @@ function games(app) {
 			if(req.headers['X-Player-Token'] !== game.p1Key && req.headers['X-Player-Token'] !== game.p2Key) {
 	        	return _return400Error(res, 'Wrong X-Player-Token!');
 	     	}
+	     	
 	      	res.status(200);
 		});
 
